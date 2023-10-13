@@ -1,7 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://cyryfla3otn38"]
+[gd_scene load_steps=11 format=3 uid="uid://cyryfla3otn38"]
 
 [ext_resource type="PackedScene" uid="uid://bjs7ii0oxnrj3" path="res://Scenes/player.tscn" id="1_t2fqb"]
 [ext_resource type="Texture2D" uid="uid://byj6wpuw0hhqk" path="res://Sprites/gagen.png" id="2_ffx1o"]
+[ext_resource type="Texture2D" uid="uid://dthb4b5mgsdc3" path="res://Sprites/MU43_light_grey_melamine_fullHD.jpeg" id="3_tv4fb"]
+[ext_resource type="Texture2D" uid="uid://dkpiaf60r7pej" path="res://Sprites/360_F_537693372_ZHYyySAU7BYh82XlakRueOcysVzOmDwu.png" id="4_1qjh4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_v7hjm"]
 texture = ExtResource("2_ffx1o")
@@ -30,6 +32,11 @@ size = Vector2(3569, 57)
 
 [sub_resource type="BoxMesh" id="BoxMesh_1hmeg"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vjy2b"]
+size = Vector2(633, 616)
+
+[sub_resource type="BoxMesh" id="BoxMesh_fpbps"]
+
 [node name="World" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_t2fqb")]
@@ -43,18 +50,82 @@ position = Vector2(77, 74)
 tile_set = SubResource("TileSet_h34h1")
 format = 2
 
-[node name="Floor" type="StaticBody2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(115, 320)
+limit_left = -1500
+limit_top = 0
+limit_right = 2050
+limit_bottom = 640
+position_smoothing_enabled = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+[node name="World Borders" type="Node2D" parent="."]
+
+[node name="Floor" type="StaticBody2D" parent="World Borders"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World Borders/Floor"]
 position = Vector2(258.5, 632)
 shape = SubResource("RectangleShape2D_jo3k6")
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="Floor"]
+[node name="MeshInstance2D" type="MeshInstance2D" parent="World Borders/Floor"]
 position = Vector2(259, 631)
 scale = Vector2(3576, -52)
 mesh = SubResource("BoxMesh_1hmeg")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(115, 320)
-limit_bottom = 640
-position_smoothing_enabled = true
+[node name="Roof" type="StaticBody2D" parent="World Borders"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World Borders/Roof"]
+position = Vector2(258.5, 0)
+shape = SubResource("RectangleShape2D_jo3k6")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="World Borders/Roof"]
+position = Vector2(259, 0)
+scale = Vector2(3576, -52)
+mesh = SubResource("BoxMesh_1hmeg")
+
+[node name="Wall_left" type="StaticBody2D" parent="World Borders"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World Borders/Wall_left"]
+position = Vector2(-1500, 632)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_jo3k6")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="World Borders/Wall_left"]
+position = Vector2(-1500, 631)
+rotation = 1.5708
+scale = Vector2(3576, -52)
+mesh = SubResource("BoxMesh_1hmeg")
+
+[node name="Wall_right" type="StaticBody2D" parent="World Borders"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World Borders/Wall_right"]
+position = Vector2(2050, 632)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_jo3k6")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="World Borders/Wall_right"]
+position = Vector2(2050, 631)
+rotation = 1.5708
+scale = Vector2(3576, -52)
+mesh = SubResource("BoxMesh_1hmeg")
+
+[node name="Buttons" type="Node2D" parent="."]
+
+[node name="Start" type="Node2D" parent="Buttons"]
+
+[node name="Area2D" type="Area2D" parent="Buttons/Start"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Buttons/Start/Area2D"]
+position = Vector2(-538, 318)
+shape = SubResource("RectangleShape2D_vjy2b")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Buttons/Start/Area2D/CollisionShape2D"]
+z_index = -1
+position = Vector2(3, -0.500002)
+scale = Vector2(640, 619)
+mesh = SubResource("BoxMesh_fpbps")
+texture = ExtResource("3_tv4fb")
+
+[node name="360F537693372ZhYyySau7bYh82XlakRueOcysVzOmDwu" type="Sprite2D" parent="Buttons/Start/Area2D/CollisionShape2D"]
+position = Vector2(3, -93.5)
+scale = Vector2(1.17778, 1.18611)
+texture = ExtResource("4_1qjh4")

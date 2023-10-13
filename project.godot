@@ -21,7 +21,8 @@ project/assembly_name="Thomas T Hingy"
 
 [physics]
 
-2d/default_gravity=400.0
+2d/physics_engine="GodotPhysics2D"
+2d/default_gravity=150.0
 
 [rendering]
 

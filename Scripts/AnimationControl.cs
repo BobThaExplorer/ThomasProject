@@ -4,7 +4,7 @@ using System;
 public partial class AnimationControl : CharacterBody2D
 {
 	public const float speed = 660.0f;
-	public const float Jumpvelocity = -6000.0f;
+	public const float Jumpvelocity = -9000.0f;
 	public float gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
 	public string current_dir = "none"; // Vi gemmer retning her
 	private Vector2 temp;
@@ -23,16 +23,6 @@ public partial class AnimationControl : CharacterBody2D
 				// Add the gravity.
 		if (!IsOnFloor())
 			velocity.Y += gravity * (float)delta;
-		
-		if (IsOnFloor())
-		{
-				GD.Print("isonfloor = true");
-		}
-		else
-		{
-				GD.Print("isonfloor = false");
-		}
-
 	}
 	
  
@@ -57,26 +47,29 @@ public partial class AnimationControl : CharacterBody2D
 			Velocity = new Vector2(0,gravity);
 		}
 		
-			if (Input.IsKeyPressed(Key.W) && IsOnFloor()){
+		if (Input.IsKeyPressed(Key.W) && IsOnFloor()){
 			temp = new Vector2(0,Jumpvelocity);
 			Velocity = temp;
-			anim.Play("Jump");
-			GD.Print("jump");
-			}
+		}
 			
 		if (Input.IsKeyPressed(Key.S) && IsOnFloor()){
-			anim.Play("Tension");
+			current_dir = "down";
 			temp = new Vector2(0,0);
+			anim.Play("Tension");
 			Velocity = temp;
-			GD.Print("Tension");
 			
 			if (Input.IsKeyPressed(Key.W) && IsOnFloor()){
-			temp = new Vector2(0,Jumpvelocity*3);
-			Velocity = temp;
+			current_dir = "Up";
 			anim.Play("Jump");
-			GD.Print("jump");
+			temp = new Vector2(0,Jumpvelocity*2);
+			Velocity = temp;
 			}
-			}
+		}
+		if (Input.IsKeyPressed(Key.E) && IsOnFloor()){
+			current_dir = "Taunt";
+		}
+
+	
 		MoveAndSlide();
 	}
  
@@ -99,6 +92,19 @@ public partial class AnimationControl : CharacterBody2D
 				anim.Play("Walk");
 			else if (movement == 0)
 				anim.Play("Idle");
+		}
+		else if ( dir == "down") {
+			if (movement == 0)
+				anim.Play("Idle");
+		}
+		else if ( dir == "up") {
+			if (movement == 1)
+				anim.Play("Jump");
+			else anim.Play("Idle");
+		}
+		else if ( dir == "Taunt") {
+			if (movement == 0)
+				anim.Play("ThumbUp");
 		}
 	}
 }
