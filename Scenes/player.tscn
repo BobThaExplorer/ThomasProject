@@ -214,7 +214,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"Jump",
-"speed": 7.0
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -337,4 +337,4 @@ shape = SubResource("CapsuleShape2D_733h0")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(110, 490)
 sprite_frames = SubResource("SpriteFrames_ccv1r")
-animation = &"ThumbUp"
+animation = &"Jump"

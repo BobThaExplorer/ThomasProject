@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Thomas T Hingy"
-run/main_scene="res://Scenes/world.tscn"
+run/main_scene="res://Scenes/MainMenu.tscn"
 config/features=PackedStringArray("4.1", "C#", "GL Compatibility")
 config/icon="res://Sprites/icon.svg"
 
@@ -60,5 +60,6 @@ ui_down={
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
