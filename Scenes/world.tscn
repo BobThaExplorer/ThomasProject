@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://cyryfla3otn38"]
+[gd_scene load_steps=12 format=3 uid="uid://cyryfla3otn38"]
 
 [ext_resource type="PackedScene" uid="uid://bjs7ii0oxnrj3" path="res://Scenes/player.tscn" id="1_t2fqb"]
 [ext_resource type="Texture2D" uid="uid://byj6wpuw0hhqk" path="res://Sprites/gagen.png" id="2_ffx1o"]
+[ext_resource type="Script" path="res://Move.cs" id="2_k6sfa"]
 [ext_resource type="Texture2D" uid="uid://dthb4b5mgsdc3" path="res://Sprites/MU43_light_grey_melamine_fullHD.jpeg" id="3_tv4fb"]
 [ext_resource type="Texture2D" uid="uid://dkpiaf60r7pej" path="res://Sprites/360_F_537693372_ZHYyySAU7BYh82XlakRueOcysVzOmDwu.png" id="4_1qjh4"]
 
@@ -40,6 +41,7 @@ size = Vector2(633, 616)
 [node name="World" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_t2fqb")]
+script = ExtResource("2_k6sfa")
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 position = Vector2(115, 320)
