@@ -1,0 +1,58 @@
+[gd_scene load_steps=3 format=3 uid="uid://b8yrptihyjsyu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q4l0g"]
+size = Vector2(3569, 57)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ojv23"]
+
+[node name="Level2" type="Node2D"]
+
+[node name="World Borders" type="Node2D" parent="."]
+
+[node name="Floor" type="StaticBody2D" parent="World Borders"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World Borders/Floor"]
+position = Vector2(258.5, 632)
+shape = SubResource("RectangleShape2D_q4l0g")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="World Borders/Floor"]
+position = Vector2(259, 631)
+scale = Vector2(3576, -52)
+mesh = SubResource("BoxMesh_ojv23")
+
+[node name="Roof" type="StaticBody2D" parent="World Borders"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World Borders/Roof"]
+position = Vector2(258.5, 0)
+shape = SubResource("RectangleShape2D_q4l0g")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="World Borders/Roof"]
+position = Vector2(259, 0)
+scale = Vector2(3576, -52)
+mesh = SubResource("BoxMesh_ojv23")
+
+[node name="Wall_left" type="StaticBody2D" parent="World Borders"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World Borders/Wall_left"]
+position = Vector2(-1500, 632)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_q4l0g")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="World Borders/Wall_left"]
+position = Vector2(-1500, 631)
+rotation = 1.5708
+scale = Vector2(3576, -52)
+mesh = SubResource("BoxMesh_ojv23")
+
+[node name="Wall_right" type="StaticBody2D" parent="World Borders"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World Borders/Wall_right"]
+position = Vector2(2050, 632)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_q4l0g")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="World Borders/Wall_right"]
+position = Vector2(2050, 631)
+rotation = 1.5708
+scale = Vector2(3576, -52)
+mesh = SubResource("BoxMesh_ojv23")

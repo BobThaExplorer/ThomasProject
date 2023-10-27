@@ -1,0 +1,112 @@
+[gd_scene load_steps=10 format=3 uid="uid://cyryfla3otn38"]
+
+[ext_resource type="PackedScene" uid="uid://bjs7ii0oxnrj3" path="res://Scenes/player.tscn" id="1_077ey"]
+[ext_resource type="Script" path="res://Scenes/player.cs" id="2_nb5e8"]
+[ext_resource type="Texture2D" uid="uid://byj6wpuw0hhqk" path="res://Sprites/gagen.png" id="3_jglcj"]
+[ext_resource type="Texture2D" uid="uid://cp4ggb7xyopks" path="res://Sprites/pixilart-drawing (5).png" id="4_1eofn"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_v7hjm"]
+texture = ExtResource("3_jglcj")
+0:0/0 = 0
+1:0/0 = 0
+3:0/0 = 0
+2:0/0 = 0
+4:0/0 = 0
+2:1/0 = 0
+2:2/0 = 0
+0:3/0 = 0
+0:4/0 = 0
+0:5/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+4:3/0 = 0
+4:4/0 = 0
+4:5/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_h34h1"]
+sources/0 = SubResource("TileSetAtlasSource_v7hjm")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jo3k6"]
+size = Vector2(3569, 57)
+
+[sub_resource type="BoxMesh" id="BoxMesh_1hmeg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vjy2b"]
+size = Vector2(3424, 616)
+
+[node name="World" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_077ey")]
+script = ExtResource("2_nb5e8")
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
+position = Vector2(115, 370)
+remote_path = NodePath("../../Camera2D")
+
+[node name="TileMap" type="TileMap" parent="."]
+position = Vector2(77, 74)
+tile_set = SubResource("TileSet_h34h1")
+format = 2
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(115, 370)
+limit_left = -1500
+limit_top = 0
+limit_right = 2050
+limit_bottom = 640
+position_smoothing_enabled = true
+
+[node name="World Borders" type="Node2D" parent="."]
+
+[node name="Floor" type="StaticBody2D" parent="World Borders"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World Borders/Floor"]
+position = Vector2(258.5, 632)
+shape = SubResource("RectangleShape2D_jo3k6")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="World Borders/Floor"]
+position = Vector2(259, 631)
+scale = Vector2(3576, -52)
+mesh = SubResource("BoxMesh_1hmeg")
+
+[node name="Roof" type="StaticBody2D" parent="World Borders"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World Borders/Roof"]
+position = Vector2(258.5, 0)
+shape = SubResource("RectangleShape2D_jo3k6")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="World Borders/Roof"]
+position = Vector2(259, 0)
+scale = Vector2(3576, -52)
+mesh = SubResource("BoxMesh_1hmeg")
+
+[node name="Wall_right" type="StaticBody2D" parent="World Borders"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World Borders/Wall_right"]
+position = Vector2(2050, 632)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_jo3k6")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="World Borders/Wall_right"]
+position = Vector2(2050, 631)
+rotation = 1.5708
+scale = Vector2(3576, -52)
+mesh = SubResource("BoxMesh_1hmeg")
+
+[node name="Buttons" type="Node2D" parent="."]
+
+[node name="Start" type="Node2D" parent="Buttons"]
+
+[node name="Area2D" type="Area2D" parent="Buttons/Start"]
+
+[node name="StartSign" type="Sprite2D" parent="Buttons/Start/Area2D"]
+position = Vector2(-861, 327)
+scale = Vector2(6, 6)
+texture = ExtResource("4_1eofn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Buttons/Start/Area2D"]
+position = Vector2(330, 315)
+shape = SubResource("RectangleShape2D_vjy2b")
+
+[connection signal="area_exited" from="Buttons/Start/Area2D" to="Player" method="_on_area_2d_area_exited"]
