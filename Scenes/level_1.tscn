@@ -1,11 +1,30 @@
-[gd_scene load_steps=3 format=3 uid="uid://b8yrptihyjsyu"]
+[gd_scene load_steps=5 format=3 uid="uid://b8yrptihyjsyu"]
+
+[ext_resource type="PackedScene" uid="uid://bjs7ii0oxnrj3" path="res://Scenes/player.tscn" id="1_7tbol"]
+[ext_resource type="Script" path="res://Scripts/player.cs" id="2_pd6jx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q4l0g"]
 size = Vector2(3569, 57)
 
 [sub_resource type="BoxMesh" id="BoxMesh_ojv23"]
 
-[node name="Level2" type="Node2D"]
+[node name="Level1" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_7tbol")]
+position = Vector2(-1400, 30)
+script = ExtResource("2_pd6jx")
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
+position = Vector2(115, 370)
+remote_path = NodePath("../../Camera2D")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-1285, 400)
+limit_left = -1500
+limit_top = 0
+limit_right = 2050
+limit_bottom = 640
+position_smoothing_enabled = true
 
 [node name="World Borders" type="Node2D" parent="."]
 
@@ -56,3 +75,10 @@ position = Vector2(2050, 631)
 rotation = 1.5708
 scale = Vector2(3576, -52)
 mesh = SubResource("BoxMesh_ojv23")
+
+[node name="TextEdit" type="TextEdit" parent="."]
+offset_left = -1456.0
+offset_top = 42.0
+offset_right = -1266.0
+offset_bottom = 84.0
+text = "Level 1 "

@@ -108,7 +108,7 @@ public partial class player : CharacterBody2D
 	private void _on_area_2d_area_exited(Area2D area)
 {
 	GD.Print("test");
-	GetTree().ChangeSceneToPacked("res://Scenes/level_2.tscn");
+	GetTree().ChangeSceneToFile("res://Scenes/level_1.tscn");
 }
 }
 
