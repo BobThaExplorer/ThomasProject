@@ -4,13 +4,15 @@ using System;
 public partial class player : CharacterBody2D
 {
 	public const float Speed = 800.0f;
-	public const float JumpVelocity = -500.0f;
+	public const float JumpVelocity = -750.0f;
 	public string current_dir = "none"; // Vi gemmer retning her
 	private Vector2 temp = Vector2.Zero;
+	private Timer delayTimer;
 	AnimatedSprite2D anim;
 	
 		public override void _Ready()
 	{
+		delayTimer = GetNode<Timer>("Timer");
 		anim =  GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		anim.Play("Idle");
 	}
@@ -105,11 +107,27 @@ public partial class player : CharacterBody2D
 				anim.Play("ThumbUp");
 		}
 	}
-	private void _on_area_2d_area_exited(Area2D area)
+
+
+private void _on_area_2d_area_exited(Area2D area)
 {
+	delayTimer.Start();
+}
+private void _on_area_2d_area_entered(Area2D area)
+{
+	GetTree().ChangeSceneToFile("res://Scenes/MainMenu.tscn");
+	GD.Print("Ooga");
+}
+
+private void _on_timer_timeout()
+{
+	
 	GD.Print("test");
 	GetTree().ChangeSceneToFile("res://Scenes/level_1.tscn");
 }
+
+
+
 }
 
 

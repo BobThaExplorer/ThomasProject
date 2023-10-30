@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cts21d4i6yprk"
-path="res://.godot/imported/klassen.png-69cc55228f0d53a99c0dce5940f79eb8.ctex"
+uid="uid://0sf5cahl3cd3"
+path="res://.godot/imported/klassen2.png-2a4cf1eb46952dcb15473f728e9acef8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/klassen.png"
-dest_files=["res://.godot/imported/klassen.png-69cc55228f0d53a99c0dce5940f79eb8.ctex"]
+source_file="res://Sprites/klassen2.png"
+dest_files=["res://.godot/imported/klassen2.png-2a4cf1eb46952dcb15473f728e9acef8.ctex"]
 
 [params]
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=47 format=3 uid="uid://bjs7ii0oxnrj3"]
 
-[ext_resource type="Script" path="res://Scripts/Movement.cs" id="1_ut6xe"]
+[ext_resource type="Script" path="res://Scripts/player.cs" id="1_kmpfr"]
 [ext_resource type="Texture2D" uid="uid://bq08dq0jqnkka" path="res://Sprites/thomas-Sheet.png" id="2_vp2as"]
 [ext_resource type="Texture2D" uid="uid://dvdoflr6glq5o" path="res://Sprites/thomas_win-SheetFIX2.png" id="3_3q06c"]
 
@@ -289,7 +289,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ra6c1")
 }],
-"loop": false,
+"loop": true,
 "name": &"ThumbUp",
 "speed": 5.0
 }, {
@@ -329,8 +329,9 @@ animations = [{
 }]
 
 [node name="Player" type="CharacterBody2D"]
+collision_layer = 3
 platform_floor_layers = 4294966271
-script = ExtResource("1_ut6xe")
+script = ExtResource("1_kmpfr")
 
 [node name="Area2D" type="Area2D" parent="."]
 
@@ -341,7 +342,7 @@ shape = SubResource("CapsuleShape2D_733h0")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(110, 490)
 sprite_frames = SubResource("SpriteFrames_ccv1r")
-animation = &"Walk"
+animation = &"ThumbUp"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(117, 489)

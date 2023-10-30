@@ -1,84 +1,100 @@
-[gd_scene load_steps=5 format=3 uid="uid://b8yrptihyjsyu"]
+[gd_scene load_steps=6 format=3 uid="uid://b8yrptihyjsyu"]
 
 [ext_resource type="PackedScene" uid="uid://bjs7ii0oxnrj3" path="res://Scenes/player.tscn" id="1_7tbol"]
-[ext_resource type="Script" path="res://Scripts/player.cs" id="2_pd6jx"]
+[ext_resource type="Texture2D" uid="uid://fehy5dc10hdx" path="res://Sprites/gang_backdrop.png" id="3_1sdmf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q4l0g"]
 size = Vector2(3569, 57)
 
 [sub_resource type="BoxMesh" id="BoxMesh_ojv23"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6sb5h"]
+size = Vector2(512.45, 2322.6)
+
 [node name="Level1" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_7tbol")]
 position = Vector2(-1400, 30)
-script = ExtResource("2_pd6jx")
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 position = Vector2(115, 370)
 remote_path = NodePath("../../Camera2D")
 
+[node name="Timer" type="Timer" parent="Player"]
+wait_time = 0.1
+one_shot = true
+
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-1285, 400)
+zoom = Vector2(0.5, 0.5)
 limit_left = -1500
-limit_top = 0
-limit_right = 2050
+limit_right = 6050
 limit_bottom = 640
 position_smoothing_enabled = true
+position_smoothing_speed = 10.0
 
-[node name="World Borders" type="Node2D" parent="."]
+[node name="World Sprites" type="Node2D" parent="."]
 
-[node name="Floor" type="StaticBody2D" parent="World Borders"]
+[node name="Background" type="Node" parent="World Sprites"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="World Borders/Floor"]
+[node name="GangBackdrop2" type="Sprite2D" parent="World Sprites/Background"]
+z_index = -1
+position = Vector2(3090, -400)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("3_1sdmf")
+
+[node name="GangBackdrop" type="Sprite2D" parent="World Sprites/Background"]
+z_index = -1
+position = Vector2(90, -400)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("3_1sdmf")
+
+[node name="Floor" type="StaticBody2D" parent="World Sprites"]
+scale = Vector2(3, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World Sprites/Floor"]
 position = Vector2(258.5, 632)
 shape = SubResource("RectangleShape2D_q4l0g")
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="World Borders/Floor"]
+[node name="MeshInstance2D" type="MeshInstance2D" parent="World Sprites/Floor"]
 position = Vector2(259, 631)
 scale = Vector2(3576, -52)
 mesh = SubResource("BoxMesh_ojv23")
 
-[node name="Roof" type="StaticBody2D" parent="World Borders"]
+[node name="Wall_left" type="StaticBody2D" parent="World Sprites"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="World Borders/Roof"]
-position = Vector2(258.5, 0)
-shape = SubResource("RectangleShape2D_q4l0g")
-
-[node name="MeshInstance2D" type="MeshInstance2D" parent="World Borders/Roof"]
-position = Vector2(259, 0)
-scale = Vector2(3576, -52)
-mesh = SubResource("BoxMesh_ojv23")
-
-[node name="Wall_left" type="StaticBody2D" parent="World Borders"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="World Borders/Wall_left"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World Sprites/Wall_left"]
 position = Vector2(-1500, 632)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_q4l0g")
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="World Borders/Wall_left"]
+[node name="MeshInstance2D" type="MeshInstance2D" parent="World Sprites/Wall_left"]
 position = Vector2(-1500, 631)
 rotation = 1.5708
 scale = Vector2(3576, -52)
 mesh = SubResource("BoxMesh_ojv23")
 
-[node name="Wall_right" type="StaticBody2D" parent="World Borders"]
+[node name="Wall_right" type="StaticBody2D" parent="World Sprites"]
+position = Vector2(4000, 0)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="World Borders/Wall_right"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World Sprites/Wall_right"]
 position = Vector2(2050, 632)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_q4l0g")
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="World Borders/Wall_right"]
+[node name="MeshInstance2D" type="MeshInstance2D" parent="World Sprites/Wall_right"]
 position = Vector2(2050, 631)
 rotation = 1.5708
 scale = Vector2(3576, -52)
 mesh = SubResource("BoxMesh_ojv23")
 
-[node name="TextEdit" type="TextEdit" parent="."]
-offset_left = -1456.0
-offset_top = 42.0
-offset_right = -1266.0
-offset_bottom = 84.0
-text = "Level 1 "
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(6000, 0)
+scale = Vector2(0.28938, 0.99635)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-436.024, 324)
+scale = Vector2(2.486, 0.264359)
+shape = SubResource("RectangleShape2D_6sb5h")
+
+[connection signal="area_entered" from="Area2D" to="Player" method="_on_area_2d_area_entered"]
